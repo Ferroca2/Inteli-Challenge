@@ -24,7 +24,7 @@ This is how the application works.
 
 2. This is our NEWSCOINS token:
 
-![logo token NEWSCoin](https://user-images.githubusercontent.com/101767386/236679910-303a33b9-3daf-4332-be5e-ef338b9882eb.png)
+![logo token NEWSCoin fundo preto](https://user-images.githubusercontent.com/101767386/236680007-9494a3cc-95d1-4854-9d27-c83dc1532e70.png)
 
 
 
@@ -45,7 +45,7 @@ use this link first
 3. npm start
 ### Front-end 
 Our front usesthe firebase emulators for running cloud functions and a database locally.For using firebase you have to install the firebase CLI using the command:  npm install -g firebase-tools
-After that, set your .env file inside the functions folde rto use openai(OPENAI_API_KEY)  and follow this commands to run the app:
+After that, set your .env file inside the functions folder to use openai(OPENAI_API_KEY)  and follow this commands to run the app:
 1. npm run firebase
 2. npm run client:dev
 This commands have to be run in different terminals
@@ -58,6 +58,9 @@ This commands have to be run in different terminals
 4. In the analysts page, you can vote in you favorite analyst and give him a token that represents his reputation in our platform. Note: the token isn't given by the user and don't cost anything to be minted for the lucky analyst!
 
 ## Team:
+
 [DannxC](https://github.com/DannxC)
+
 [LFRezende](https://github.com/LFRezende)
+
 [Ferroca2](https://github.com/Ferroca2)
