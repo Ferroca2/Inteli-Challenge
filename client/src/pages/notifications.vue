@@ -1,5 +1,22 @@
 <script setup lang="ts">
 import AnalystCard from 'components/analyst-card.vue';
+import { onMounted, ref } from 'vue';
+import { getFirestore, collection, CollectionReference, getDocs } from 'firebase/firestore';
+
+
+interface Analyst {
+    name: string;
+    votes: number;
+    address: string;
+}
+
+const analysts = ref<Analyst[]>();
+onMounted(async () => {
+    const analystsRef = collection(getFirestore(), `Analysts`) as CollectionReference<Analyst>;
+    const analystsSnap = await getDocs(analystsRef);
+    analysts.value = analystsSnap.docs.map(doc => doc.data());
+});
+
 </script>
 
 <template>
@@ -11,16 +28,11 @@ import AnalystCard from 'components/analyst-card.vue';
             class="column justify-center items-center full-width"
         >
             <analyst-card
-                name="Ferroca"
-                reputation="5"
-            />
-            <analyst-card
-                name="Lisa"
-                reputation="3"
-            />
-            <analyst-card
-                name="Filé"
-                reputation="2"
+                v-for="a in analysts"
+                :key="a.name"
+                :name="a.name"
+                :reputation="a.votes"
+                :address="a.address"
             />
         </div>
     </q-page>

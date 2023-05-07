@@ -16,7 +16,6 @@ onMounted(async () => {
     loading.value = true;
     const { data } = await newsApi.get('/');
     news.value = data;
-    console.log(data);
     loading.value = false;
 });
 </script>

@@ -40,6 +40,10 @@
                 "function": "getCoinsData"
             },
             {
+                "source": "/api/mint",
+                "function": "mintGovernanceToken"
+            },
+            {
                 "source": "**",
                 "destination": "/index.html"
             }

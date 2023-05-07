@@ -1,12 +1,41 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { doc, getFirestore, setDoc } from '@firebase/firestore';
+import { harthosApi } from 'boot/axios';
+import { defineProps, ref } from 'vue';
 
 interface Analyst {
     name: string;
-    reputation: string;
+    reputation: number;
+    address: string;
 }
 
-defineProps<Analyst>();
+const props = defineProps<Analyst>();
+
+const editedVote =ref(props.reputation);
+
+const loading = ref<boolean>(false);
+
+
+async function vote(address: string) {
+    loading.value = true;
+    try{
+        await harthosApi.post('/', {
+            address,
+        });
+
+        editedVote.value++;
+
+        const analystsRef = doc(getFirestore(), `Analysts/${address}`);
+        await setDoc(analystsRef, {
+            votes: editedVote.value,
+        }, { merge: true });
+    } catch (err) {
+        console.log(err);
+    }
+    finally {
+        loading.value = false;
+    }
+}
 </script>
 
 <template>
@@ -41,16 +70,25 @@ defineProps<Analyst>();
                     Reputation
                 </div>
                 <div class="text-h6">
-                    {{ reputation }}
+                    {{ editedVote }}
                 </div>
             </q-card-section>
 
             <q-card-section>
                 <q-btn
                     color="accent"
-                    label="Recomend"
                     class="q-ma-sm"
-                />
+                    :loading="loading"
+                    @click="vote(address)"
+                >
+                    Recommend
+                    <template #loading>
+                        <q-spinner
+                            color="white"
+                            size="20px"
+                        />
+                    </template>
+                </q-btn>
             </q-card-section>
         </q-card-section>
     </q-card>

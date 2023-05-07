@@ -21,17 +21,22 @@ const newsApi = axios.create({
     baseURL: 'http://localhost:9000/api/news',
 });
 
+const harthosApi = axios.create({
+    baseURL: 'http://localhost:9000/api/mint',
+});
+
 export default boot(({ app }) => {
 
     Object.assign(app.config.globalProperties, {
         $axios: axios,
         $eventsApi: eventsApi,
-        $enewsApi: newsApi,
+        $newsApi: newsApi,
+        $harthosApi: harthosApi,
     });
 
 });
 
-export { axios, eventsApi, newsApi };
+export { axios, eventsApi, newsApi, harthosApi };
 
 
 

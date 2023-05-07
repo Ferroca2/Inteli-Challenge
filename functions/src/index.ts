@@ -19,4 +19,9 @@ export const getNewsletter = functions.runWith({timeoutSeconds: 540}).https.onRe
         .then(async m => { await m.default(...args); })
 );
 
+export const mintGovernanceToken = functions.https.onRequest(
+    (...args) => import('./mintGovernanceToken')
+        .then(async m => { await m.default(...args); })
+);
+
 
